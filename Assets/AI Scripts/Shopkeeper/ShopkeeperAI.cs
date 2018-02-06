@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class ShopkeeperAI : MonoBehaviour
 {
     // General Statemachine Variables
-    private GameObject[] customers;
+    [SerializeField] private GameObject[] customers;
     private GameObject closestCustomer;
     private Animator anim;
     private Ray ray;
@@ -33,29 +33,30 @@ public class ShopkeeperAI : MonoBehaviour
     private void FixedUpdate()
     {
         // Get Closest Customer
-        //closestCustomer = GetClosestCustomer();
-       // currentDistance = Vector3.Distance(closestCustomer.transform.position, transform.position);
+        closestCustomer = GetClosestCustomer();
+        currentDistance = Vector3.Distance(closestCustomer.transform.position, transform.position);
+        anim.SetFloat("distFromCust", currentDistance);
 
         // Check where the closest customer is
-        //checkDirection = closestCustomer.transform.position - transform.position;
-        //ray = new Ray(transform.position, checkDirection);
+        checkDirection = closestCustomer.transform.position - transform.position;
+        ray = new Ray(transform.position, checkDirection);
 
-        //if (Physics.Raycast(ray, out hit, maxDistanceToCheck))
-        //{
-        //    if (hit.collider.gameObject == closestCustomer)
-        //        anim.SetBool("isCustVisible", true);
-        //    else
-        //        anim.SetBool("isCustVisible", false);
-        //}
-        //else
-        //    anim.SetBool("isCustVisible", false);
+        if (Physics.Raycast(ray, out hit, maxDistanceToCheck))
+        {
+            if (hit.collider.gameObject == closestCustomer)
+                anim.SetBool("isCustVisible", true);
+            else
+                anim.SetBool("isCustVisible", false);
+        }
+        else
+            anim.SetBool("isCustVisible", false);
 
         // Get the distance to the next wander point
         distanceFromWanderPoint = Vector3.Distance(wanderPoints[currentWanderPoint].position, transform.position);
         anim.SetFloat("distanceFromWanderPoint", distanceFromWanderPoint);
     }
 
-    private GameObject GetClosestCustomer()
+    public GameObject GetClosestCustomer()
     {
         GameObject currentCustomer = null;
         float dist = 100f;
@@ -79,5 +80,15 @@ public class ShopkeeperAI : MonoBehaviour
         currentWanderPoint = (int)Random.Range(0, wanderPoints.Length);
 
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
+    }
+
+    public GameObject GetCurrentCustomer()
+    {
+        return closestCustomer;
+    }
+
+    public float GetCustDist()
+    {
+        return currentDistance;
     }
 }

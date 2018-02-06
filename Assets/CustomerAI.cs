@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MerchantAI : MonoBehaviour {
+public class CustomerAI : MonoBehaviour {
 
-
-    private GameObject customer;
+    private GameObject merchant;
     private Animator animator;
     private Ray ray;
     private RaycastHit hit;
@@ -15,8 +14,9 @@ public class MerchantAI : MonoBehaviour {
     private Vector3 checkDirection;
 
     // Wait/Patrol state variables
-    public Transform pointA;
-    public Transform pointB;
+    public Transform shopA;
+    public Transform shopB;
+    public Transform shopC;
     public NavMeshAgent navMeshAgent;
     private int currentTarget;
     private float distanceFromTarget;
@@ -25,64 +25,72 @@ public class MerchantAI : MonoBehaviour {
 
     private void Awake()
     {
-        customer = GameObject.FindWithTag("Customer");
+        merchant = GameObject.FindWithTag("Merchant");
         animator = gameObject.GetComponent<Animator>();
-        pointA = GameObject.Find("p1").transform;
-        pointB = GameObject.Find("p2").transform;
+        shopA = GameObject.Find("p1").transform;
+        shopB = GameObject.Find("p2").transform;
+        shopC = GameObject.Find("p3").transform;
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-        waypoints = new Transform[2] 
+        waypoints = new Transform[3]
         {
-            pointA,
-            pointB
+            shopA,
+            shopB,
+            shopC
         };
 
         currentTarget = 0;
         navMeshAgent.SetDestination(waypoints[currentTarget].position);
 
-   
+
     }
-    
+
     private void FixedUpdate()
     {
         //dist from customer
 
-        currentDistance = Vector3.Distance(customer.transform.position, transform.position);
-        animator.SetFloat("distanceFromCustomer", currentDistance);
+        currentDistance = Vector3.Distance(merchant.transform.position, transform.position);
+        animator.SetFloat("distanceFromPlayer", currentDistance);
 
         //check visible
-        checkDirection = customer.transform.position - transform.position;
+        checkDirection = merchant.transform.position - transform.position;
         ray = new Ray(transform.position, checkDirection);
         if (Physics.Raycast(ray, out hit, maxDistanceToCheck))
         {
-            if(hit.collider.gameObject == customer)
+            if (hit.collider.gameObject == merchant)
             {
-                animator.SetBool("isCustomerVisible", true);
+                animator.SetBool("isMerchantVisible", true);
             }
             else
             {
-                animator.SetBool("isCustomerVisible", false);
+                animator.SetBool("isMerchantVisible", false);
             }
         }
         else
         {
-            animator.SetBool("isCustomerVisible", false);
+            animator.SetBool("isMerchantVisible", false);
         }
 
         //get distance to next waypoint
 
         distanceFromTarget = Vector3.Distance(waypoints[currentTarget].position, transform.position);
-        animator.SetFloat("distanceFromWaypoint", distanceFromTarget);   
+        animator.SetFloat("distanceFromWaypoint", distanceFromTarget);
     }
+
     public void setNextPoint()
     {
-        switch(currentTarget)
+        switch (currentTarget)
         {
             case 0:
                 currentTarget = 1;
                 break;
             case 1:
+                currentTarget = 2;
+                break;
+            case 2:
                 currentTarget = 0;
                 break;
+
+            
 
         }
         navMeshAgent.SetDestination(waypoints[currentTarget].position);

@@ -2954,7 +2954,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distToStock: 0
+  maxCustomerDist: 0
+  givenStock: 1
   stockArea: {fileID: 572278113}
+  debugGetStockCount: 0
 --- !u!1 &875728972
 GameObject:
   m_ObjectHideFlags: 0
@@ -3210,7 +3213,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distToStock: 0
+  maxCustomerDist: 0
+  givenStock: 1
   stockArea: {fileID: 1925583412}
+  debugGetStockCount: 0
 --- !u!1 &933645823
 GameObject:
   m_ObjectHideFlags: 0
@@ -5214,7 +5220,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1581718723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.75, y: 1.48, z: 6.65}
+  m_LocalPosition: {x: 11.58, y: 1.48, z: 5.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

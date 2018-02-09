@@ -15,6 +15,7 @@ public class FollowCustomer : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        FollowOrGetStockShopKeeper followOrGetStock = animator.gameObject.GetComponent<FollowOrGetStockShopKeeper>();
         followOrGetStock.Follow();
     }
 }

@@ -8,6 +8,7 @@ public class ShopkeeperAI : MonoBehaviour
     // General Statemachine Variables
     [SerializeField] private GameObject[] customers;
     private GameObject closestCustomer;
+    public GameObject currentCustomer;
     private Animator anim;
     private Ray ray;
     private RaycastHit hit;
@@ -58,7 +59,7 @@ public class ShopkeeperAI : MonoBehaviour
 
     public GameObject GetClosestCustomer()
     {
-        GameObject currentCustomer = null;
+        GameObject closestCust = null;
         float dist = 100f;
 
         foreach(GameObject cust in customers)
@@ -68,11 +69,12 @@ public class ShopkeeperAI : MonoBehaviour
             if(currentDist < dist)
             {
                 dist = currentDist;
-                currentCustomer = cust;
+                closestCust = cust;
+
             }
         }
 
-        return currentCustomer;
+        return closestCust;
     }
 
     public void SetNextWanderPoint()
@@ -80,6 +82,11 @@ public class ShopkeeperAI : MonoBehaviour
         currentWanderPoint = (int)Random.Range(0, wanderPoints.Length);
 
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
+    }
+
+    public Transform GetCurrentWanderPoint()
+    {
+        return wanderPoints[currentWanderPoint];
     }
 
     public GameObject GetCurrentCustomer()

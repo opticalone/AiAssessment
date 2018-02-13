@@ -17,7 +17,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     [SerializeField] float debugGetStockCount = 0f;
     [SerializeField] bool debugBool;
 
-    private bool isOccupied;
+    [SerializeField] private bool isOccupied;
     private bool isGettingStock;
 
     private void Awake()

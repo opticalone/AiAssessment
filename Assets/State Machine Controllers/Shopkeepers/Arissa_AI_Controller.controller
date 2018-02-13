@@ -222,7 +222,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -236,7 +236,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: distFromCust
-    m_EventTreshold: 4.5
+    m_EventTreshold: 4.7
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102666777794554874}
   m_Solo: 0

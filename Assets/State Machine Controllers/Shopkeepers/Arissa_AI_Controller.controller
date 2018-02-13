@@ -362,7 +362,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: distFromCust
-    m_EventTreshold: 4.5
+    m_EventTreshold: 5
   m_DstStateMachine: {fileID: 1107787650892341946}
   m_DstState: {fileID: 0}
   m_Solo: 0

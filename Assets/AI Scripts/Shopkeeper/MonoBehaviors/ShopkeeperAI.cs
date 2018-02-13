@@ -29,6 +29,8 @@ public class ShopkeeperAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         currentWanderPoint = 0;
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
+
+        
     }
 
     private void FixedUpdate()

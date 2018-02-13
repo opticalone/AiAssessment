@@ -7,7 +7,6 @@ public class SelectWanderPointState : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        ShopkeeperAI shopkeeperAI = animator.gameObject.GetComponent<ShopkeeperAI>();
-        shopkeeperAI.SetNextWanderPoint();
+        animator.gameObject.GetComponent<ShopkeeperAI>().SetNextWanderPoint();
     }
 }

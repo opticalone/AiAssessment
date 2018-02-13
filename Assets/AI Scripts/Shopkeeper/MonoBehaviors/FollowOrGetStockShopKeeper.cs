@@ -106,14 +106,12 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     IEnumerator FollowDelay()
     {
         float delay = 0f;
-
         shopAI.SetNextWanderPoint();
-        //transform.LookAt(shopAI.GetCurrentWanderPoint());
 
         while (delay < 5f)
         {
             delay++;
-
+            
             yield return new WaitForSeconds(1f);
         }
         isGettingStock = false;

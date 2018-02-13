@@ -16,12 +16,18 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     [SerializeField] Transform stockArea;
     [SerializeField] float debugGetStockCount = 0f;
 
+    private bool isOccupied;
+    [SerializeField] private bool isGettingStock;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         shopAI = GetComponent<ShopkeeperAI>();
         anim = GetComponent<Animator>();
         maxCustomerDist = 5f;
+        isOccupied = false;
+        isGettingStock = false;
+
     }
 
     private void FixedUpdate()
@@ -33,7 +39,10 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     {
         if (anim.GetBool("haveStock"))
             anim.SetBool("haveStock", false);
-
+        
+        if (isOccupied)
+            isOccupied = false;
+        
         shopAI.currentCustomer = shopAI.GetCurrentCustomer();
 
         if(shopAI.GetCustDist() < maxCustomerDist && anim.GetBool("isCustVisible") && givenStock)
@@ -47,6 +56,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
 
         if (maxCustomerDist != 5f && !anim.GetBool("isCustVisible"))
             maxCustomerDist = 5f;
+       
     }
 
     public void GetStock()
@@ -56,6 +66,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
         anim.SetFloat("distToStock", distToStock);
         agent.SetDestination(stockArea.position);
         givenStock = false;
+        isGettingStock = true;
     }
 
     public void PickupStock()
@@ -92,6 +103,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
             StartCoroutine("FollowDelay");
             
         }
+        isOccupied = false;
     }
 
     IEnumerator FollowDelay()
@@ -107,7 +119,24 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
+        isGettingStock = false;
         givenStock = true;
+        
         anim.SetBool("haveStock", false);
     }
+
+    public bool GetShopKeepOccupied()
+    {
+        return isOccupied;
+    }
+    public bool GettingStockState()
+    {
+        return isGettingStock;
+    }
+    
+    public void SetIsOccupied(bool setState)
+    {
+        isOccupied = setState;
+    }
+
 }

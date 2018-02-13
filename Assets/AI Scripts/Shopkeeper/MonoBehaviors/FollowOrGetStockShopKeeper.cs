@@ -15,6 +15,10 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     [SerializeField] bool givenStock = true;
     [SerializeField] Transform stockArea;
     [SerializeField] float debugGetStockCount = 0f;
+    [SerializeField] bool debugBool;
+
+    private bool isOccupied;
+    private bool isGettingStock;
 
     private void Awake()
     {
@@ -22,6 +26,8 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
         shopAI = GetComponent<ShopkeeperAI>();
         anim = GetComponent<Animator>();
         maxCustomerDist = 5f;
+        isOccupied = false;
+        isGettingStock = false;
     }
 
     private void FixedUpdate()
@@ -33,6 +39,9 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     {
         if (anim.GetBool("haveStock"))
             anim.SetBool("haveStock", false);
+
+        if (!isOccupied)
+            isOccupied = true;
 
         shopAI.currentCustomer = shopAI.GetCurrentCustomer();
 
@@ -55,7 +64,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
         distToStock = Vector3.Distance(stockArea.transform.position, transform.position);
         anim.SetFloat("distToStock", distToStock);
         agent.SetDestination(stockArea.position);
-        givenStock = false;
+        isGettingStock = true;
     }
 
     public void PickupStock()
@@ -107,7 +116,23 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
-        givenStock = true;
+        isGettingStock = false;
+        isOccupied = false;
         anim.SetBool("haveStock", false);
+    }
+
+    public bool GetShopkeepOccupied()
+    {
+        return isOccupied;
+    }
+
+    public bool GettingStockState()
+    {
+        return isGettingStock;
+    }
+
+    public void SetDebugBool(bool setter)
+    {
+        debugBool = setter;
     }
 }

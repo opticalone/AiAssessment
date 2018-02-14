@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Customer
+=======
+  - customer
+>>>>>>> dev
   layers:
   - Default
   - TransparentFX

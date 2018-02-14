@@ -13,17 +13,24 @@ public class UIDeactivate : MonoBehaviour
 	void Start ()
     {
         cust = GetComponent<CustomerAI>();
+        if (cust == null) { Debug.LogError("cust not found", this); }
         
         canvasToDeactivate.enabled = false;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
-        keep = cust.GetCurrentShopkeep().GetComponent<ShopkeeperAI>();
-        if (this.gameObject == keep.GetCurrentCustomer())
-            canvasToDeactivate.enabled = true;
-        else
-            canvasToDeactivate.enabled = false;
-	}
+        GameObject temp = cust.GetCurrentShopkeep();
+
+        if (temp != null)
+        {
+            keep = temp.GetComponent<ShopkeeperAI>();
+
+            if (this.gameObject == keep.GetCurrentCustomer())
+                canvasToDeactivate.enabled = true;
+            else
+                canvasToDeactivate.enabled = false;
+        }
+    }
 }

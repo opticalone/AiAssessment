@@ -5,9 +5,11 @@ using UnityEngine.AI;
 
 public class CustomerAI : MonoBehaviour
 {
+    [Header("Wander Variables")]
     [SerializeField] Transform[] wanderPoints;
     [SerializeField] float distanceFromWanderPoint;
     [SerializeField] int currentWanderPoint;
+   
     Vector3 checkDirection;
     Ray ray;
     RaycastHit hit;
@@ -17,9 +19,11 @@ public class CustomerAI : MonoBehaviour
 
     // Debug Variables
     [SerializeField] GameObject[] allShopKeeps;
-    [SerializeField] GameObject closestShopKeep;
-    [SerializeField] GameObject currentShopkeep;
+    [SerializeField] GameObject closestShopKeep = null;
+    [SerializeField] GameObject currentShopkeep = null;
     [SerializeField] private float currentDistance;
+
+    [SerializeField] GameObject eyeImage;
 
     private void Awake()
     {
@@ -27,10 +31,29 @@ public class CustomerAI : MonoBehaviour
         anim = GetComponent<Animator>();
         currentWanderPoint = (int)Random.Range(0, wanderPoints.Length);
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
+        eyeImage.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(currentShopkeep != null)
+        {
+            if(this.gameObject == 
+                currentShopkeep.gameObject.GetComponent<ShopkeeperAI>().GetCurrentCustomer())
+            {
+                eyeImage.SetActive(true);
+            }
+            else
+            {
+                if (eyeImage.activeSelf)
+                    eyeImage.SetActive(false);
+            }
+        }
     }
 
     private void FixedUpdate()
     {
+        
         // Get The Closest Shopkeep
         closestShopKeep = GetClosestShopKeep();
         currentDistance = Vector3.Distance(closestShopKeep.transform.position, transform.position);

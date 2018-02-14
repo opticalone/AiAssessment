@@ -12,9 +12,10 @@ public class ShopkeeperAI : MonoBehaviour
     private Animator anim;
     private Ray ray;
     private RaycastHit hit;
-    private float maxDistanceToCheck = 4f;
+    private float maxDistanceToCheck = 6f;
     [SerializeField] private float currentDistance;
     private Vector3 checkDirection;
+    [SerializeField] GameObject eyeImage;
 
     // Wander State Variables
     [SerializeField] private Transform[] wanderPoints;
@@ -29,8 +30,25 @@ public class ShopkeeperAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         currentWanderPoint = 0;
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
-
+        eyeImage.SetActive(false);
         
+    }
+
+    private void Update()
+    {
+        if(currentCustomer != null)
+        {
+            if(this.gameObject == 
+                currentCustomer.gameObject.GetComponent<CustomerAI>().GetCurrentShopkeep())
+            {
+                eyeImage.SetActive(true);
+            }
+            else
+            {
+                if (eyeImage.activeSelf)
+                    eyeImage.SetActive(false);
+            }
+        }
     }
 
     private void FixedUpdate()

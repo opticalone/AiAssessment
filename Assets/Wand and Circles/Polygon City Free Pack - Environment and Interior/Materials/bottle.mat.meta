@@ -1,20 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Models/Materials/Boss_diffuse.mat.meta
-<<<<<<< HEAD
-guid: 1d1b1a1e82f32044fb0358cd27cb5935
-timeCreated: 1518539477
-=======
-guid: f2838f2c7ec4fe145a2430fc8f2b2e6e
-timeCreated: 1518465218
->>>>>>> dev
-licenseType: Free
-=======
-guid: d6fcd8d376fcdbd46bd84adfdfe723d3
-timeCreated: 1506251605
-licenseType: Store
->>>>>>> michael:Assets/Wand and Circles/Polygon City Free Pack - Environment and Interior/Materials/bottle.mat.meta
+guid: 34c69100cfc71054993f5af319628a44
 NativeFormatImporter:
-  mainObjectFileID: 2100000
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

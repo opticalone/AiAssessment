@@ -23,33 +23,13 @@ public class CustomerAI : MonoBehaviour
     [SerializeField] GameObject currentShopkeep = null;
     [SerializeField] private float currentDistance;
 
-    [SerializeField] GameObject eyeImage;
-
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         currentWanderPoint = (int)Random.Range(0, wanderPoints.Length);
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
-        eyeImage.SetActive(false);
         closestShopKeep = GetClosestShopKeep();
-    }
-
-    private void Update()
-    {
-        if(currentShopkeep != null)
-        {
-            if(this.gameObject == 
-                currentShopkeep.gameObject.GetComponent<ShopkeeperAI>().GetCurrentCustomer())
-            {
-                eyeImage.SetActive(true);
-            }
-            else
-            {
-                if (eyeImage.activeSelf)
-                    eyeImage.SetActive(false);
-            }
-        }
     }
 
     private void FixedUpdate()

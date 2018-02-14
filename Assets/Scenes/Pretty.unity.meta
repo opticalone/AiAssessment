@@ -1,19 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Models/vanguard_t_choonyung(1).fbm.meta
-<<<<<<< HEAD
-guid: 4aca0e596cbe71545a0e2b28d57fee0e
-folderAsset: yes
-timeCreated: 1518454231
-=======
-guid: 003a63a8a81d4f140a4a9b511f09ca96
-folderAsset: yes
-timeCreated: 1518456953
->>>>>>> dev
-=======
-guid: 2aff45e7cdb21a84d99c2b98a178c3de
-timeCreated: 1517860038
->>>>>>> michael:Assets/Scenes/Pretty.unity.meta
-licenseType: Free
+guid: ddbc7bd43730fa14c8cd01a90f7d67fb
 DefaultImporter:
   userData: 
   assetBundleName: 

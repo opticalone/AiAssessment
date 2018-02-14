@@ -17,9 +17,6 @@ public class ShopkeeperAI : MonoBehaviour
     [SerializeField] private float currentDistance;
     private Vector3 checkDirection;
 
-    [Header("UI")]
-    [SerializeField] GameObject eyeImage;
-
     private FollowOrGetStockShopKeeper shop;
 
 
@@ -38,25 +35,7 @@ public class ShopkeeperAI : MonoBehaviour
         shop = GetComponent<FollowOrGetStockShopKeeper>();
         currentWanderPoint = 0;
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
-        eyeImage.SetActive(false);
         
-    }
-
-    private void Update()
-    {
-        if(currentCustomer != null)
-        {
-            if(this.gameObject == 
-                currentCustomer.gameObject.GetComponent<CustomerAI>().GetCurrentShopkeep())
-            {
-                eyeImage.SetActive(true);
-            }
-            else
-            {
-                if (eyeImage.activeSelf)
-                    eyeImage.SetActive(false);
-            }
-        }
     }
 
     private void FixedUpdate()

@@ -1,6 +1,16 @@
 fileFormatVersion: 2
-guid: a12419668a304c9408eb39de4de93d6c
+<<<<<<< HEAD:Assets/Models/Materials/vanguard_diffuse.mat.meta
+<<<<<<< HEAD
+guid: 368a42ef3301afc4ab3284086c13d46b
+timeCreated: 1518454228
+=======
+guid: 52039121a7c5e924cbf662259c252138
+timeCreated: 1518456950
+>>>>>>> dev
+=======
+guid: 6c556335347934648b922e94513139c7
 timeCreated: 1517867729
+>>>>>>> michael:Assets/Guard.mat.meta
 licenseType: Free
 NativeFormatImporter:
   mainObjectFileID: 2100000

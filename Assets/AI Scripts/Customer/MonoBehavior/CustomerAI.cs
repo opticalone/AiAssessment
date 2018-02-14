@@ -20,7 +20,7 @@ public class CustomerAI : MonoBehaviour
     private Vector3 checkDirection;
 
     // Wander State Variables
-    [SerializeField] private Transform[] wanderPoints;
+    [SerializeField] private Transform[] wsanderPoints;
     [SerializeField] private float distanceFromWanderPoint;
     [SerializeField] private int currentWanderPoint;
     [SerializeField] private NavMeshAgent agent;

@@ -34,6 +34,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     private void FixedUpdate()
     {
         distToStock = Vector3.Distance(stockArea.transform.position, transform.position);
+        anim.SetFloat("distToStock", distToStock);
     }
 
     public void Follow()
@@ -41,11 +42,8 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
         if (anim.GetBool("haveStock"))
             anim.SetBool("haveStock", false);
 
-
         if (!isOccupied)
             isOccupied = true;
-
-
         
         if (isOccupied)
             isOccupied = false;

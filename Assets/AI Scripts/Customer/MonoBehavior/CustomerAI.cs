@@ -3,73 +3,132 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CustomerAI : MonoBehaviour 
+public class CustomerAI : MonoBehaviour
 {
+    [Header("Wander Variables")]
+    [SerializeField] Transform[] wanderPoints;
+    [SerializeField] float distanceFromWanderPoint;
+    [SerializeField] int currentWanderPoint;
+   
+    Vector3 checkDirection;
+    Ray ray;
+    RaycastHit hit;
+    float maxDistanceToCheck = 6f;
+    NavMeshAgent agent;
+    Animator anim;
 
-    //state machine variables
-    [SerializeField] private GameObject[] shopKeeps;
-    private GameObject closestShopKeep;
-    public GameObject CurrentShopKeep;
-
-
-    private Animator anim;
-    private Ray ray;
-    private RaycastHit hit;
-    private float maxDistanceToCheck = 4f;
+    // Debug Variables
+    [SerializeField] GameObject[] allShopKeeps;
+    [SerializeField] GameObject closestShopKeep = null;
+    [SerializeField] GameObject currentShopkeep = null;
     [SerializeField] private float currentDistance;
-    private Vector3 checkDirection;
 
-    // Wander State Variables
-    [SerializeField] private Transform[] wanderPoints;
-    [SerializeField] private float distanceFromWanderPoint;
-    [SerializeField] private int currentWanderPoint;
-    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] GameObject eyeImage;
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();        //............................//attaches animator
-        agent = GetComponent<NavMeshAgent>();   //...........................//attatches navmesh agent to our gameObject
-
-        currentWanderPoint = (int)Random.Range(0, wanderPoints.Length);  //..//sets current point to 0
-        agent.SetDestination(wanderPoints[currentWanderPoint].position);//..//sets the destination to the curerent wanderpoint
-
+        agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
+        currentWanderPoint = (int)Random.Range(0, wanderPoints.Length);
+        agent.SetDestination(wanderPoints[currentWanderPoint].position);
+        eyeImage.SetActive(false);
+        closestShopKeep = GetClosestShopKeep();
     }
 
-    public GameObject GetClosestShopKeep()
+    private void Update()
     {
-        GameObject closestKeep = null;
-        float dist = 100f;
-
-        foreach(GameObject keep in shopKeeps)
+        if(currentShopkeep != null)
         {
-            float currentDist = Vector3.Distance(keep.transform.position, transform.position);
-
-            if(currentDist < dist)
+            if(this.gameObject == 
+                currentShopkeep.gameObject.GetComponent<ShopkeeperAI>().GetCurrentCustomer())
             {
-                dist = currentDist;
-                closestKeep = keep;
-
+                eyeImage.SetActive(true);
+            }
+            else
+            {
+                if (eyeImage.activeSelf)
+                    eyeImage.SetActive(false);
             }
         }
+    }
 
-        return closestKeep;
+    private void FixedUpdate()
+    {
+        
+        // Get The Closest Shopkeep
+        closestShopKeep = GetClosestShopKeep();
+        currentDistance = Vector3.Distance(closestShopKeep.transform.position, transform.position);
+        anim.SetFloat("distFromKeep", currentDistance);
+
+        // Check where the closest keep is
+        checkDirection = closestShopKeep.transform.position - transform.position;
+        ray = new Ray(transform.position, checkDirection);
+
+        if (Physics.Raycast(ray, out hit, maxDistanceToCheck))
+        {
+            if (hit.collider.gameObject == closestShopKeep)
+                anim.SetBool("isKeepVisible", true);
+            else
+                anim.SetBool("isKeepVisible", false);
+        }
+        else
+            anim.SetBool("isKeepVisible", false);
+
+        // Get the distance to the next wander point
+        distanceFromWanderPoint = Vector3.Distance(wanderPoints[currentWanderPoint].position, transform.position);
+        anim.SetFloat("distanceFromWanderPoint", distanceFromWanderPoint);
     }
 
     public void SetNextWanderPoint()
     {
         currentWanderPoint = (int)Random.Range(0, wanderPoints.Length);
+        currentShopkeep = GetCurrentShopkeep();
+
+        if (anim.GetBool("receivedStock"))
+            anim.SetBool("receivedStock", false);
 
         agent.SetDestination(wanderPoints[currentWanderPoint].position);
     }
 
-    private void FixedUpdate()
+    public GameObject GetClosestShopKeep()
     {
-        distanceFromWanderPoint = Vector3.Distance(wanderPoints[currentWanderPoint].position, transform.position);
-        anim.SetFloat("distFromWanderPoint", distanceFromWanderPoint); 
+        GameObject closestShop = null;
+        float dist = 100f;
 
+        foreach (GameObject keep in allShopKeeps)
+        {
+            float currentDist = Vector3.Distance(keep.transform.position, transform.position);
+
+            if (currentDist < dist)
+            {
+                dist = currentDist;
+                closestShop = keep;
+            }
+        }
+
+        return closestShop;
     }
 
+    public GameObject GetCurrentShopkeep()
+    {
+        return closestShopKeep;
+    }
 
+    public bool GetCurrentKeepOccupied()
+    {
+        return GetCurrentShopkeep().GetComponent<FollowOrGetStockShopKeeper>().GetShopkeepOccupied();
+    }
 
+    public void Wait()
+    {
+        if(GetCurrentShopkeep().GetComponent<ShopkeeperAI>().GetCurrentCustomer() == this.gameObject && GetCurrentKeepOccupied())
+        {
+            agent.SetDestination(transform.position);
+        }
+    }
 
+    public bool KeepGettingStock()
+    {
+        return GetCurrentShopkeep().GetComponent<FollowOrGetStockShopKeeper>().GettingStockState();
+    }
 }

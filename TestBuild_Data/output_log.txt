@@ -21,13 +21,110 @@ Platform assembly: C:\AIAssessment\TestBuild_Data\Managed\UnityEngine.Analytics.
 Loading C:\AIAssessment\TestBuild_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
 Platform assembly: C:\AIAssessment\TestBuild_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\AIAssessment\TestBuild_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.049 seconds
+- Completed reload, in  0.233 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.886326 ms
+The referenced script on this Behaviour (Game Object 'Spotlight') is missing!
+ 
+(Filename:  Line: 1758)
+
+The referenced script on this Behaviour (Game Object 'Spotlight') is missing!
+ 
+(Filename:  Line: 1758)
+
+The referenced script on this Behaviour (Game Object 'Spotlight') is missing!
+ 
+(Filename:  Line: 1758)
+
+The tree Tree_3 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 140)
+
+The tree Tree_6 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 140)
+
+The tree Tree_25 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 140)
+
+The tree Tree_14 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 140)
+
+The tree Tree_12 must use the Nature/Soft Occlusion shader. Otherwise billboarding/lighting will not work correctly.
+ 
+(Filename:  Line: 140)
+
+UnloadTime: 1.107339 ms
+TerrainCollider: MeshCollider is not supported on terrain at the moment.
+ 
+(Filename:  Line: 188)
+
+TerrainCollider: MeshCollider is not supported on terrain at the moment.
+ 
+(Filename:  Line: 188)
+
+TerrainCollider: MeshCollider is not supported on terrain at the moment.
+ 
+(Filename:  Line: 188)
+
+TerrainCollider: MeshCollider is not supported on terrain at the moment.
+ 
+(Filename:  Line: 188)
+
+TerrainCollider: MeshCollider is not supported on terrain at the moment.
+ 
+(Filename:  Line: 188)
+
+Exception: Critical Error: "Hidden/BlitAdd" shader is missing. Make sure it is included in "Always Included Shaders" in ProjectSettings/Graphics.
+  at VolumetricLightRenderer.Awake () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: GetRef
+  at (wrapper managed-to-native) UnityEngine.Camera:RemoveCommandBuffer (UnityEngine.Rendering.CameraEvent,UnityEngine.Rendering.CommandBuffer)
+  at VolumetricLightRenderer.OnDisable () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Exception: Critical Error: "Sandbox/VolumetricLight" shader is missing. Make sure it is included in "Always Included Shaders" in ProjectSettings/Graphics.
+  at VolumetricLight.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Exception: Critical Error: "Sandbox/VolumetricLight" shader is missing. Make sure it is included in "Always Included Shaders" in ProjectSettings/Graphics.
+  at VolumetricLight.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Exception: Critical Error: "Sandbox/VolumetricLight" shader is missing. Make sure it is included in "Always Included Shaders" in ProjectSettings/Graphics.
+  at VolumetricLight.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Exception: Critical Error: "Sandbox/VolumetricLight" shader is missing. Make sure it is included in "Always Included Shaders" in ProjectSettings/Graphics.
+  at VolumetricLight.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Exception: Critical Error: "Sandbox/VolumetricLight" shader is missing. Make sure it is included in "Always Included Shaders" in ProjectSettings/Graphics.
+  at VolumetricLight.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Exception: Critical Error: "Sandbox/VolumetricLight" shader is missing. Make sure it is included in "Always Included Shaders" in ProjectSettings/Graphics.
+  at VolumetricLight.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
 Setting up 4 worker threads for Enlighten.
-  Thread -> id: 324c -> priority: 1 
-  Thread -> id: 3168 -> priority: 1 
-  Thread -> id: 28b8 -> priority: 1 
-  Thread -> id: 2f84 -> priority: 1 
+  Thread -> id: 2d60 -> priority: 1 
+  Thread -> id: 198c -> priority: 1 
+  Thread -> id: 3ac -> priority: 1 
+  Thread -> id: 3258 -> priority: 1 
+Internal: JobTempAlloc has allocations that are more than 4 frames old - this is not allowed and likely a leak
+ 
+(Filename:  Line: 371)
+

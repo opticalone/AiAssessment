@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-
 public class FollowOrGetStockShopKeeper : MonoBehaviour
 {
     private NavMeshAgent agent;
@@ -20,8 +18,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     [SerializeField] private bool isOccupied;
     private bool isGettingStock;
 
-    private bool isOccupied;
-    [SerializeField] private bool isGettingStock;
+    
 
     private void Awake()
     {
@@ -31,10 +28,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
         maxCustomerDist = 5f;
         isOccupied = false;
         isGettingStock = false;
-<<<<<<< HEAD
-=======
 
->>>>>>> dev
     }
 
     private void FixedUpdate()
@@ -46,17 +40,17 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     {
         if (anim.GetBool("haveStock"))
             anim.SetBool("haveStock", false);
-<<<<<<< HEAD
+
 
         if (!isOccupied)
             isOccupied = true;
 
-=======
+
         
         if (isOccupied)
             isOccupied = false;
         
->>>>>>> dev
+
         shopAI.currentCustomer = shopAI.GetCurrentCustomer();
 
         if(shopAI.GetCustDist() < maxCustomerDist && anim.GetBool("isCustVisible") && givenStock)
@@ -79,10 +73,9 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
         distToStock = Vector3.Distance(stockArea.transform.position, transform.position);
         anim.SetFloat("distToStock", distToStock);
         agent.SetDestination(stockArea.position);
-<<<<<<< HEAD
-=======
+
         givenStock = false;
->>>>>>> dev
+
         isGettingStock = true;
     }
 
@@ -135,7 +128,7 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         isGettingStock = false;
-<<<<<<< HEAD
+
         isOccupied = false;
         anim.SetBool("haveStock", false);
     }
@@ -143,35 +136,17 @@ public class FollowOrGetStockShopKeeper : MonoBehaviour
     public bool GetShopkeepOccupied()
     {
         return isOccupied;
-    }
+    }   
 
-=======
-        givenStock = true;
-        
-        anim.SetBool("haveStock", false);
-    }
-
-    public bool GetShopKeepOccupied()
-    {
-        return isOccupied;
-    }
->>>>>>> dev
     public bool GettingStockState()
     {
         return isGettingStock;
     }
-<<<<<<< HEAD
-
-    public void SetDebugBool(bool setter)
-    {
-        debugBool = setter;
-    }
-=======
     
     public void SetIsOccupied(bool setState)
     {
         isOccupied = setState;
     }
 
->>>>>>> dev
+
 }

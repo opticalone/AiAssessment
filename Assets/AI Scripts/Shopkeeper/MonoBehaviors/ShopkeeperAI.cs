@@ -6,21 +6,25 @@ using UnityEngine.AI;
 public class ShopkeeperAI : MonoBehaviour
 {
     // General Statemachine Variables
+    [Header("Customers")]
     [SerializeField] private GameObject[] customers;
     private GameObject closestCustomer;
     public GameObject currentCustomer;
     private Animator anim;
     private Ray ray;
     private RaycastHit hit;
-    private float maxDistanceToCheck = 6f;
+    private float maxDistanceToCheck = 10f;
     [SerializeField] private float currentDistance;
     private Vector3 checkDirection;
+
+    [Header("UI")]
     [SerializeField] GameObject eyeImage;
 
     private FollowOrGetStockShopKeeper shop;
 
 
     // Wander State Variables
+    [Header("Wander Variables")]
     [SerializeField] private Transform[] wanderPoints;
     [SerializeField] private float distanceFromWanderPoint;
     [SerializeField] private int currentWanderPoint;
@@ -68,9 +72,7 @@ public class ShopkeeperAI : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistanceToCheck))
         {
-           // if (hit.collider.gameObject == closestCustomer)
-            if(hit.collider.tag == "customer")
-        
+            if (hit.collider.gameObject == closestCustomer)
                 anim.SetBool("isCustVisible", true);
             else
                 anim.SetBool("isCustVisible", false);
